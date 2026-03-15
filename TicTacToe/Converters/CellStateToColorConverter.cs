@@ -9,9 +9,9 @@ public class CellStateToColorConverter : IValueConverter
         value is CellState s ? s switch
         {
             CellState.X => Color.FromArgb("#6C63FF"),
-            CellState.O => Color.FromArgb("#F687B3"),
-            _ => Color.FromArgb("#E0E5EC")
-        } : Color.FromArgb("#E0E5EC");
+            CellState.O => Color.FromArgb("#C084FC"),
+            _ => Color.FromArgb("#D8DCE6")   // slightly darker than bg = inset/recessed look
+        } : Color.FromArgb("#D8DCE6");
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
