@@ -11,16 +11,16 @@
         <converters:CellStateToColorConverter x:Key="CellColor"/>
         <converters:InverseBoolConverter      x:Key="InverseBool"/>
 
-        <!-- Acrylic card panel -->
+        <!-- Glassmorphism card -->
         <Style x:Key="GlassCard" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="#55181825"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
-            <Setter Property="Stroke" Value="#44FFFFFF"/>
-            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="BackgroundColor" Value="#25FFFFFF"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 24"/>
+            <Setter Property="Stroke" Value="#50FFFFFF"/>
+            <Setter Property="StrokeThickness" Value="1.5"/>
             <Setter Property="Padding" Value="28"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#99000000" Offset="0,8" Radius="24" Opacity="0.5"/>
+                    <Shadow Brush="#80000000" Offset="0,8" Radius="32" Opacity="0.4"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -29,61 +29,97 @@
         <Style x:Key="CellButton" TargetType="Button">
             <Setter Property="FontSize" Value="52"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="CornerRadius" Value="16"/>
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="HeightRequest" Value="110"/>
             <Setter Property="WidthRequest" Value="110"/>
+            <Setter Property="BorderColor" Value="#40FFFFFF"/>
+            <Setter Property="BorderWidth" Value="1"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#88000000" Offset="0,4" Radius="10" Opacity="0.4"/>
+                    <Shadow Brush="#60000000" Offset="0,4" Radius="12" Opacity="0.3"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style x:Key="SectionLabel" TargetType="Label">
-            <Setter Property="TextColor" Value="#DDCDD6F4"/>
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="#EEFFFFFF"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="Margin" Value="0,10,0,4"/>
         </Style>
 
         <Style x:Key="RadioStyle" TargetType="RadioButton">
-            <Setter Property="TextColor" Value="#DDCDD6F4"/>
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="#DDFFFFFF"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
 
         <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#99CBA6F7"/>
-            <Setter Property="TextColor" Value="#1E1E2E"/>
+            <Setter Property="BackgroundColor" Value="#40FFFFFF"/>
+            <Setter Property="TextColor" Value="White"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontSize" Value="17"/>
-            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="HeightRequest" Value="52"/>
+            <Setter Property="BorderColor" Value="#60FFFFFF"/>
+            <Setter Property="BorderWidth" Value="1.5"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#AACBA6F7" Offset="0,4" Radius="16" Opacity="0.5"/>
+                    <Shadow Brush="#80FFFFFF" Offset="0,4" Radius="20" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style x:Key="SecondaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#4445475A"/>
-            <Setter Property="TextColor" Value="#CDD6F4"/>
+            <Setter Property="BackgroundColor" Value="#20FFFFFF"/>
+            <Setter Property="TextColor" Value="#DDFFFFFF"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="HeightRequest" Value="44"/>
-            <Setter Property="BorderColor" Value="#33FFFFFF"/>
+            <Setter Property="BorderColor" Value="#35FFFFFF"/>
             <Setter Property="BorderWidth" Value="1"/>
         </Style>
     </ContentPage.Resources>
 
-    <!-- Full-screen dark tinted background overlay -->
     <Grid>
-        <BoxView BackgroundColor="#CC111120" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        <!-- Vibrant gradient background -->
+        <BoxView HorizontalOptions="Fill" VerticalOptions="Fill">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3B1F6B" Offset="0.0"/>
+                    <GradientStop Color="#1A2980" Offset="0.45"/>
+                    <GradientStop Color="#0F3460" Offset="0.75"/>
+                    <GradientStop Color="#16213E" Offset="1.0"/>
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <!-- Decorative blobs for depth -->
+        <Ellipse WidthRequest="320" HeightRequest="320"
+                 HorizontalOptions="Start" VerticalOptions="Start"
+                 Margin="-80,-80,0,0" Opacity="0.18">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#A855F7" Offset="0"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Ellipse WidthRequest="280" HeightRequest="280"
+                 HorizontalOptions="End" VerticalOptions="End"
+                 Margin="0,0,-60,-60" Opacity="0.15">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#06B6D4" Offset="0"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
 
         <ScrollView>
-            <VerticalStackLayout Padding="32,40,32,40" Spacing="20"
+            <VerticalStackLayout Padding="28,44,28,44" Spacing="20"
                                  HorizontalOptions="Center" MaximumWidthRequest="460">
 
                 <!-- Title -->
@@ -91,10 +127,10 @@
                        FontSize="44" FontAttributes="Bold"
                        TextColor="White"
                        HorizontalOptions="Center"
-                       Shadow="{Shadow Brush='#AACBA6F7', Offset='0,2', Radius='20', Opacity='0.8'}"/>
-                <Label Text="vs AI"
-                       FontSize="14"
-                       TextColor="#88CDD6F4"
+                       Shadow="{Shadow Brush='#99A855F7', Offset='0,4', Radius='24', Opacity='0.8'}"/>
+                <Label Text="Challenge the AI"
+                       FontSize="13"
+                       TextColor="#99FFFFFF"
                        HorizontalOptions="Center"
                        Margin="0,-14,0,0"/>
 
@@ -133,20 +169,18 @@
                 <!-- ======================== GAME PANEL ======================== -->
                 <VerticalStackLayout IsVisible="{Binding IsGameActive}" Spacing="16">
 
-                    <!-- Status card -->
-                    <Border Style="{StaticResource GlassCard}" Padding="16">
+                    <Border Style="{StaticResource GlassCard}" Padding="16,14">
                         <Label Text="{Binding StatusMessage}"
-                               FontSize="20" FontAttributes="Bold"
-                               TextColor="#A6E3A1"
+                               FontSize="19" FontAttributes="Bold"
+                               TextColor="White"
                                HorizontalOptions="Center"
                                HorizontalTextAlignment="Center"/>
                     </Border>
 
-                    <!-- Board card -->
                     <Border Style="{StaticResource GlassCard}" Padding="20">
                         <Grid ColumnDefinitions="110,110,110"
                               RowDefinitions="110,110,110"
-                              ColumnSpacing="8" RowSpacing="8"
+                              ColumnSpacing="10" RowSpacing="10"
                               HorizontalOptions="Center">
 
                             <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
@@ -209,21 +243,19 @@
                 <!-- ======================== RESULT PANEL ======================== -->
                 <VerticalStackLayout IsVisible="{Binding IsShowingResult}" Spacing="16">
 
-                    <!-- Result card -->
-                    <Border Style="{StaticResource GlassCard}" Padding="24">
+                    <Border Style="{StaticResource GlassCard}" Padding="24,20">
                         <Label Text="{Binding StatusMessage}"
-                               FontSize="34" FontAttributes="Bold"
-                               TextColor="#A6E3A1"
+                               FontSize="32" FontAttributes="Bold"
+                               TextColor="White"
                                HorizontalOptions="Center"
                                HorizontalTextAlignment="Center"
-                               Shadow="{Shadow Brush='#88A6E3A1', Offset='0,2', Radius='12', Opacity='0.6'}"/>
+                               Shadow="{Shadow Brush='#99FFFFFF', Offset='0,2', Radius='16', Opacity='0.5'}"/>
                     </Border>
 
-                    <!-- Final board card (read-only) -->
                     <Border Style="{StaticResource GlassCard}" Padding="20">
                         <Grid ColumnDefinitions="110,110,110"
                               RowDefinitions="110,110,110"
-                              ColumnSpacing="8" RowSpacing="8"
+                              ColumnSpacing="10" RowSpacing="10"
                               HorizontalOptions="Center">
 
                             <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
