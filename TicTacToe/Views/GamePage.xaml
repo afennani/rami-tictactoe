@@ -4,309 +4,277 @@
              xmlns:converters="clr-namespace:TicTacToe.Converters"
              x:Class="TicTacToe.Views.GamePage"
              Title="Tic Tac Toe"
-             BackgroundColor="Transparent">
+             BackgroundColor="#E0E5EC">
 
     <ContentPage.Resources>
         <converters:CellStateToTextConverter  x:Key="CellText"/>
         <converters:CellStateToColorConverter x:Key="CellColor"/>
         <converters:InverseBoolConverter      x:Key="InverseBool"/>
 
-        <!-- Glassmorphism card -->
-        <Style x:Key="GlassCard" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="#25FFFFFF"/>
+        <!-- Neumorphic raised card -->
+        <Style x:Key="NeuCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#E0E5EC"/>
             <Setter Property="StrokeShape" Value="RoundRectangle 24"/>
-            <Setter Property="Stroke" Value="#50FFFFFF"/>
+            <Setter Property="Stroke" Value="#F5F7FA"/>
             <Setter Property="StrokeThickness" Value="1.5"/>
             <Setter Property="Padding" Value="28"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#80000000" Offset="0,8" Radius="32" Opacity="0.4"/>
+                    <Shadow Brush="#B8C0CC" Offset="6,6" Radius="14" Opacity="0.7"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Cell buttons -->
+        <!-- Neumorphic cell button (raised) -->
         <Style x:Key="CellButton" TargetType="Button">
-            <Setter Property="FontSize" Value="52"/>
+            <Setter Property="FontSize" Value="48"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="CornerRadius" Value="18"/>
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="HeightRequest" Value="110"/>
             <Setter Property="WidthRequest" Value="110"/>
-            <Setter Property="BorderColor" Value="#40FFFFFF"/>
-            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="#F5F7FA"/>
+            <Setter Property="BorderWidth" Value="1.5"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#60000000" Offset="0,4" Radius="12" Opacity="0.3"/>
+                    <Shadow Brush="#B8C0CC" Offset="5,5" Radius="10" Opacity="0.6"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style x:Key="SectionLabel" TargetType="Label">
-            <Setter Property="TextColor" Value="#EEFFFFFF"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="#7A8499"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="Margin" Value="0,10,0,4"/>
         </Style>
 
         <Style x:Key="RadioStyle" TargetType="RadioButton">
-            <Setter Property="TextColor" Value="#DDFFFFFF"/>
+            <Setter Property="TextColor" Value="#5A6480"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
+        <!-- Neumorphic primary button (accent) -->
         <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#40FFFFFF"/>
+            <Setter Property="BackgroundColor" Value="#6C63FF"/>
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="HeightRequest" Value="52"/>
-            <Setter Property="BorderColor" Value="#60FFFFFF"/>
-            <Setter Property="BorderWidth" Value="1.5"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#80FFFFFF" Offset="0,4" Radius="20" Opacity="0.15"/>
+                    <Shadow Brush="#6C63FF" Offset="0,6" Radius="16" Opacity="0.4"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
+        <!-- Neumorphic secondary button -->
         <Style x:Key="SecondaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#20FFFFFF"/>
-            <Setter Property="TextColor" Value="#DDFFFFFF"/>
+            <Setter Property="BackgroundColor" Value="#E0E5EC"/>
+            <Setter Property="TextColor" Value="#7A8499"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="HeightRequest" Value="44"/>
-            <Setter Property="BorderColor" Value="#35FFFFFF"/>
-            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="HeightRequest" Value="48"/>
+            <Setter Property="BorderColor" Value="#F5F7FA"/>
+            <Setter Property="BorderWidth" Value="1.5"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="#B8C0CC" Offset="4,4" Radius="10" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </ContentPage.Resources>
 
-    <Grid>
-        <!-- Vibrant gradient background -->
-        <BoxView HorizontalOptions="Fill" VerticalOptions="Fill">
-            <BoxView.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3B1F6B" Offset="0.0"/>
-                    <GradientStop Color="#1A2980" Offset="0.45"/>
-                    <GradientStop Color="#0F3460" Offset="0.75"/>
-                    <GradientStop Color="#16213E" Offset="1.0"/>
-                </LinearGradientBrush>
-            </BoxView.Background>
-        </BoxView>
+    <ScrollView BackgroundColor="#E0E5EC">
+        <VerticalStackLayout Padding="28,44,28,44" Spacing="20"
+                             HorizontalOptions="Center" MaximumWidthRequest="440">
 
-        <!-- Decorative blobs for depth -->
-        <Ellipse WidthRequest="320" HeightRequest="320"
-                 HorizontalOptions="Start" VerticalOptions="Start"
-                 Margin="-80,-80,0,0" Opacity="0.18">
-            <Ellipse.Fill>
-                <RadialGradientBrush>
-                    <GradientStop Color="#A855F7" Offset="0"/>
-                    <GradientStop Color="Transparent" Offset="1"/>
-                </RadialGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+            <!-- Title -->
+            <Label Text="Tic Tac Toe"
+                   FontSize="36" FontAttributes="Bold"
+                   TextColor="#3D4566"
+                   HorizontalOptions="Center"/>
+            <Label Text="vs AI"
+                   FontSize="13"
+                   TextColor="#A0AAB8"
+                   HorizontalOptions="Center"
+                   Margin="0,-14,0,0"/>
 
-        <Ellipse WidthRequest="280" HeightRequest="280"
-                 HorizontalOptions="End" VerticalOptions="End"
-                 Margin="0,0,-60,-60" Opacity="0.15">
-            <Ellipse.Fill>
-                <RadialGradientBrush>
-                    <GradientStop Color="#06B6D4" Offset="0"/>
-                    <GradientStop Color="Transparent" Offset="1"/>
-                </RadialGradientBrush>
-            </Ellipse.Fill>
-        </Ellipse>
+            <!-- ======================== SETUP PANEL ======================== -->
+            <Border Style="{StaticResource NeuCard}"
+                    IsVisible="{Binding IsSetupVisible}">
+                <VerticalStackLayout Spacing="4">
 
-        <ScrollView>
-            <VerticalStackLayout Padding="28,44,28,44" Spacing="20"
-                                 HorizontalOptions="Center" MaximumWidthRequest="460">
+                    <Label Text="DIFFICULTY" Style="{StaticResource SectionLabel}"/>
+                    <HorizontalStackLayout Spacing="24">
+                        <RadioButton Content="Easy"
+                                     IsChecked="{Binding IsEasySelected, Mode=TwoWay}"
+                                     Style="{StaticResource RadioStyle}"/>
+                        <RadioButton Content="Hard (Unbeatable)"
+                                     IsChecked="{Binding IsHardSelected, Mode=TwoWay}"
+                                     Style="{StaticResource RadioStyle}"/>
+                    </HorizontalStackLayout>
 
-                <!-- Title -->
-                <Label Text="Tic Tac Toe"
-                       FontSize="44" FontAttributes="Bold"
-                       TextColor="White"
-                       HorizontalOptions="Center"
-                       Shadow="{Shadow Brush='#99A855F7', Offset='0,4', Radius='24', Opacity='0.8'}"/>
-                <Label Text="Challenge the AI"
-                       FontSize="13"
-                       TextColor="#99FFFFFF"
-                       HorizontalOptions="Center"
-                       Margin="0,-14,0,0"/>
+                    <Label Text="WHO GOES FIRST?" Style="{StaticResource SectionLabel}"/>
+                    <HorizontalStackLayout Spacing="24">
+                        <RadioButton Content="Me"
+                                     IsChecked="{Binding IsHumanFirst, Mode=TwoWay}"
+                                     Style="{StaticResource RadioStyle}"/>
+                        <RadioButton Content="Computer"
+                                     IsChecked="{Binding IsComputerFirst, Mode=TwoWay}"
+                                     Style="{StaticResource RadioStyle}"/>
+                    </HorizontalStackLayout>
 
-                <!-- ======================== SETUP PANEL ======================== -->
-                <Border Style="{StaticResource GlassCard}"
-                        IsVisible="{Binding IsSetupVisible}">
-                    <VerticalStackLayout Spacing="4">
+                    <Button Text="Start Game"
+                            Command="{Binding StartGameCommand}"
+                            Style="{StaticResource PrimaryButton}"
+                            Margin="0,16,0,0"/>
+                </VerticalStackLayout>
+            </Border>
 
-                        <Label Text="Difficulty" Style="{StaticResource SectionLabel}"/>
-                        <HorizontalStackLayout Spacing="24">
-                            <RadioButton Content="Easy"
-                                         IsChecked="{Binding IsEasySelected, Mode=TwoWay}"
-                                         Style="{StaticResource RadioStyle}"/>
-                            <RadioButton Content="Hard (Unbeatable)"
-                                         IsChecked="{Binding IsHardSelected, Mode=TwoWay}"
-                                         Style="{StaticResource RadioStyle}"/>
-                        </HorizontalStackLayout>
+            <!-- ======================== GAME PANEL ======================== -->
+            <VerticalStackLayout IsVisible="{Binding IsGameActive}" Spacing="16">
 
-                        <Label Text="Who goes first?" Style="{StaticResource SectionLabel}"/>
-                        <HorizontalStackLayout Spacing="24">
-                            <RadioButton Content="Me"
-                                         IsChecked="{Binding IsHumanFirst, Mode=TwoWay}"
-                                         Style="{StaticResource RadioStyle}"/>
-                            <RadioButton Content="Computer"
-                                         IsChecked="{Binding IsComputerFirst, Mode=TwoWay}"
-                                         Style="{StaticResource RadioStyle}"/>
-                        </HorizontalStackLayout>
-
-                        <Button Text="Start Game"
-                                Command="{Binding StartGameCommand}"
-                                Style="{StaticResource PrimaryButton}"
-                                Margin="0,16,0,0"/>
-                    </VerticalStackLayout>
+                <!-- Status card -->
+                <Border Style="{StaticResource NeuCard}" Padding="16,14">
+                    <Label Text="{Binding StatusMessage}"
+                           FontSize="17" FontAttributes="Bold"
+                           TextColor="#3D4566"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
                 </Border>
 
-                <!-- ======================== GAME PANEL ======================== -->
-                <VerticalStackLayout IsVisible="{Binding IsGameActive}" Spacing="16">
+                <!-- Board card -->
+                <Border Style="{StaticResource NeuCard}" Padding="20">
+                    <Grid ColumnDefinitions="110,110,110"
+                          RowDefinitions="110,110,110"
+                          ColumnSpacing="12" RowSpacing="12"
+                          HorizontalOptions="Center">
 
-                    <Border Style="{StaticResource GlassCard}" Padding="16,14">
-                        <Label Text="{Binding StatusMessage}"
-                               FontSize="19" FontAttributes="Bold"
-                               TextColor="White"
-                               HorizontalOptions="Center"
-                               HorizontalTextAlignment="Center"/>
-                    </Border>
+                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell0, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell0, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="0"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell1, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell1, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="1"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell2, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell2, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="2"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
 
-                    <Border Style="{StaticResource GlassCard}" Padding="20">
-                        <Grid ColumnDefinitions="110,110,110"
-                              RowDefinitions="110,110,110"
-                              ColumnSpacing="10" RowSpacing="10"
-                              HorizontalOptions="Center">
+                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell3, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="3"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell4, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell4, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="4"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell5, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell5, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="5"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
 
-                            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell0, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell0, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="0"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell1, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell1, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="1"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell2, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell2, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="2"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell6, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="6"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell7, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell7, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="7"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                        <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell8, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell8, Converter={StaticResource CellColor}}"
+                                Command="{Binding MakeMoveCommand}" CommandParameter="8"
+                                IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
+                    </Grid>
+                </Border>
 
-                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell3, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="3"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell4, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell4, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="4"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell5, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell5, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="5"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-
-                            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell6, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="6"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell7, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell7, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="7"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                            <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell8, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell8, Converter={StaticResource CellColor}}"
-                                    Command="{Binding MakeMoveCommand}" CommandParameter="8"
-                                    IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-                        </Grid>
-                    </Border>
-
-                    <Button Text="New Game"
-                            Command="{Binding RestartCommand}"
-                            Style="{StaticResource SecondaryButton}"
-                            HorizontalOptions="Center"
-                            WidthRequest="180"/>
-                </VerticalStackLayout>
-
-                <!-- ======================== RESULT PANEL ======================== -->
-                <VerticalStackLayout IsVisible="{Binding IsShowingResult}" Spacing="16">
-
-                    <Border Style="{StaticResource GlassCard}" Padding="24,20">
-                        <Label Text="{Binding StatusMessage}"
-                               FontSize="32" FontAttributes="Bold"
-                               TextColor="White"
-                               HorizontalOptions="Center"
-                               HorizontalTextAlignment="Center"
-                               Shadow="{Shadow Brush='#99FFFFFF', Offset='0,2', Radius='16', Opacity='0.5'}"/>
-                    </Border>
-
-                    <Border Style="{StaticResource GlassCard}" Padding="20">
-                        <Grid ColumnDefinitions="110,110,110"
-                              RowDefinitions="110,110,110"
-                              ColumnSpacing="10" RowSpacing="10"
-                              HorizontalOptions="Center">
-
-                            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell0, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell0, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell1, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell1, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell2, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell2, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-
-                            <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell3, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell4, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell4, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell5, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell5, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-
-                            <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell6, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell7, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell7, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                            <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource CellButton}"
-                                    Text="{Binding Cell8, Converter={StaticResource CellText}}"
-                                    BackgroundColor="{Binding Cell8, Converter={StaticResource CellColor}}"
-                                    IsEnabled="False"/>
-                        </Grid>
-                    </Border>
-
-                    <Button Text="Play Again"
-                            Command="{Binding RestartCommand}"
-                            Style="{StaticResource PrimaryButton}"
-                            HorizontalOptions="Center"
-                            WidthRequest="200"/>
-                </VerticalStackLayout>
-
+                <Button Text="New Game"
+                        Command="{Binding RestartCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        HorizontalOptions="Center"
+                        WidthRequest="180"/>
             </VerticalStackLayout>
-        </ScrollView>
-    </Grid>
+
+            <!-- ======================== RESULT PANEL ======================== -->
+            <VerticalStackLayout IsVisible="{Binding IsShowingResult}" Spacing="16">
+
+                <Border Style="{StaticResource NeuCard}" Padding="24,20">
+                    <Label Text="{Binding StatusMessage}"
+                           FontSize="30" FontAttributes="Bold"
+                           TextColor="#3D4566"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                </Border>
+
+                <Border Style="{StaticResource NeuCard}" Padding="20">
+                    <Grid ColumnDefinitions="110,110,110"
+                          RowDefinitions="110,110,110"
+                          ColumnSpacing="12" RowSpacing="12"
+                          HorizontalOptions="Center">
+
+                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell0, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell0, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell1, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell1, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell2, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell2, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+
+                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell3, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell4, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell4, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="1" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell5, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell5, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+
+                        <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell6, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell7, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell7, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                        <Button Grid.Row="2" Grid.Column="2" Style="{StaticResource CellButton}"
+                                Text="{Binding Cell8, Converter={StaticResource CellText}}"
+                                BackgroundColor="{Binding Cell8, Converter={StaticResource CellColor}}"
+                                IsEnabled="False"/>
+                    </Grid>
+                </Border>
+
+                <Button Text="Play Again"
+                        Command="{Binding RestartCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        HorizontalOptions="Center"
+                        WidthRequest="200"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
