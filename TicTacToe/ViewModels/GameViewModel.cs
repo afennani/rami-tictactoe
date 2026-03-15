@@ -27,11 +27,19 @@ public class GameViewModel : BaseViewModel
         StartGameCommand = new RelayCommand(StartGame);
         MakeMoveCommand = new AsyncRelayCommand<int>(OnCellTapped);
         RestartCommand = new RelayCommand(Restart);
+        SelectEasyCommand = new RelayCommand(() => IsEasySelected = true);
+        SelectHardCommand = new RelayCommand(() => IsHardSelected = true);
+        SelectHumanFirstCommand = new RelayCommand(() => IsHumanFirst = true);
+        SelectComputerFirstCommand = new RelayCommand(() => IsComputerFirst = true);
     }
 
     public ICommand StartGameCommand { get; }
     public ICommand MakeMoveCommand { get; }
     public ICommand RestartCommand { get; }
+    public ICommand SelectEasyCommand { get; }
+    public ICommand SelectHardCommand { get; }
+    public ICommand SelectHumanFirstCommand { get; }
+    public ICommand SelectComputerFirstCommand { get; }
 
     public CellState Cell0 => _board.Cells[0];
     public CellState Cell1 => _board.Cells[1];

@@ -4,29 +4,66 @@
              xmlns:converters="clr-namespace:TicTacToe.Converters"
              x:Class="TicTacToe.Views.GamePage"
              Title="Tic Tac Toe"
-             BackgroundColor="#E0E5EC">
+             BackgroundColor="#E4E9F2">
 
     <ContentPage.Resources>
-        <converters:CellStateToTextConverter      x:Key="CellText"/>
-        <converters:CellStateToColorConverter     x:Key="CellColor"/>
-        <converters:CellStateToTextColorConverter x:Key="CellTextColor"/>
-        <converters:InverseBoolConverter          x:Key="InverseBool"/>
+        <converters:CellStateToTextConverter        x:Key="CellText"/>
+        <converters:CellStateToColorConverter       x:Key="CellColor"/>
+        <converters:CellStateToTextColorConverter   x:Key="CellTextColor"/>
+        <converters:InverseBoolConverter            x:Key="InverseBool"/>
+        <converters:BoolToAccentColorConverter      x:Key="BoolToAccent"/>
+        <converters:BoolToAccentTextColorConverter  x:Key="BoolToAccentText"/>
 
-        <!-- Neumorphic raised card -->
-        <Style x:Key="NeuCard" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="#E0E5EC"/>
-            <Setter Property="StrokeShape" Value="RoundRectangle 24"/>
-            <Setter Property="Stroke" Value="#F8FAFF"/>
-            <Setter Property="StrokeThickness" Value="1.5"/>
-            <Setter Property="Padding" Value="24"/>
+        <!-- Small neumorphic circle button (header + controls) -->
+        <Style x:Key="NeuCircleSmall" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#E4E9F2"/>
+            <Setter Property="CornerRadius" Value="26"/>
+            <Setter Property="HeightRequest" Value="52"/>
+            <Setter Property="WidthRequest" Value="52"/>
+            <Setter Property="BorderColor" Value="#FFFFFF"/>
+            <Setter Property="BorderWidth" Value="1.5"/>
+            <Setter Property="TextColor" Value="#8892A4"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="0"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#A8B0C0" Offset="8,8" Radius="20" Opacity="0.65"/>
+                    <Shadow Brush="#A8B0C8" Offset="5,5" Radius="10" Opacity="0.6"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Cell button: no shadow (shadow clipped inside card) -->
+        <!-- Large accent circle button (play/start) -->
+        <Style x:Key="NeuCircleAccent" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#6C63FF"/>
+            <Setter Property="CornerRadius" Value="36"/>
+            <Setter Property="HeightRequest" Value="72"/>
+            <Setter Property="WidthRequest" Value="72"/>
+            <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="#6C63FF" Offset="0,8" Radius="20" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Neumorphic raised card -->
+        <Style x:Key="NeuCard" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#E4E9F2"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 24"/>
+            <Setter Property="Stroke" Value="#FFFFFF"/>
+            <Setter Property="StrokeThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="#A8B0C8" Offset="8,8" Radius="20" Opacity="0.6"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Cell button (no shadow — inside card) -->
         <Style x:Key="CellButton" TargetType="Button">
             <Setter Property="FontSize" Value="46"/>
             <Setter Property="FontAttributes" Value="Bold"/>
@@ -37,104 +74,179 @@
             <Setter Property="BorderWidth" Value="0"/>
         </Style>
 
-        <Style x:Key="SectionLabel" TargetType="Label">
-            <Setter Property="TextColor" Value="#8892A4"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="Margin" Value="0,10,0,4"/>
-        </Style>
-
-        <Style x:Key="RadioStyle" TargetType="RadioButton">
-            <Setter Property="TextColor" Value="#5A6480"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <!-- Accent raised button (purple, matching X color) -->
-        <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#6C63FF"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="HeightRequest" Value="52"/>
-            <Setter Property="BorderWidth" Value="0"/>
-            <Setter Property="Shadow">
-                <Setter.Value>
-                    <Shadow Brush="#6C63FF" Offset="0,8" Radius="20" Opacity="0.45"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Neumorphic flat secondary button -->
         <Style x:Key="SecondaryButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#E0E5EC"/>
+            <Setter Property="BackgroundColor" Value="#E4E9F2"/>
             <Setter Property="TextColor" Value="#8892A4"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="CornerRadius" Value="16"/>
             <Setter Property="HeightRequest" Value="48"/>
-            <Setter Property="BorderColor" Value="#F8FAFF"/>
+            <Setter Property="BorderColor" Value="#FFFFFF"/>
             <Setter Property="BorderWidth" Value="1.5"/>
             <Setter Property="Shadow">
                 <Setter.Value>
-                    <Shadow Brush="#A8B0C0" Offset="4,4" Radius="10" Opacity="0.5"/>
+                    <Shadow Brush="#A8B0C8" Offset="4,4" Radius="10" Opacity="0.5"/>
                 </Setter.Value>
             </Setter>
         </Style>
     </ContentPage.Resources>
 
-    <ScrollView BackgroundColor="#E0E5EC">
-        <VerticalStackLayout Padding="32,44,32,44" Spacing="20"
-                             HorizontalOptions="Center" MaximumWidthRequest="440">
+    <ScrollView BackgroundColor="#E4E9F2">
+        <VerticalStackLayout Padding="24,40,24,40" Spacing="20"
+                             HorizontalOptions="Center">
 
-            <!-- Title -->
-            <Label Text="Tic Tac Toe"
-                   FontSize="34" FontAttributes="Bold"
-                   TextColor="#3D4566"
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,2"/>
-            <Label Text="vs AI"
-                   FontSize="13"
-                   TextColor="#A0AAB8"
-                   HorizontalOptions="Center"
-                   Margin="0,-14,0,0"/>
+            <!-- ======================== SETUP — PHONE CARD ======================== -->
+            <Border IsVisible="{Binding IsSetupVisible}"
+                    BackgroundColor="#E4E9F2"
+                    StrokeShape="RoundRectangle 40"
+                    Stroke="#FFFFFF"
+                    StrokeThickness="1.5"
+                    Padding="24,28,24,36"
+                    MaximumWidthRequest="320"
+                    HorizontalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="#9BAAC0" Offset="12,12" Radius="32" Opacity="0.55"/>
+                </Border.Shadow>
 
-            <!-- ======================== SETUP PANEL ======================== -->
-            <Border Style="{StaticResource NeuCard}"
-                    IsVisible="{Binding IsSetupVisible}">
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout Spacing="0">
 
-                    <Label Text="DIFFICULTY" Style="{StaticResource SectionLabel}"/>
-                    <HorizontalStackLayout Spacing="24">
-                        <RadioButton Content="Easy"
-                                     IsChecked="{Binding IsEasySelected, Mode=TwoWay}"
-                                     Style="{StaticResource RadioStyle}"/>
-                        <RadioButton Content="Hard (Unbeatable)"
-                                     IsChecked="{Binding IsHardSelected, Mode=TwoWay}"
-                                     Style="{StaticResource RadioStyle}"/>
-                    </HorizontalStackLayout>
+                    <!-- Header row: back | label | menu -->
+                    <Grid ColumnDefinitions="52,*,52" Margin="0,0,0,20">
+                        <Button Style="{StaticResource NeuCircleSmall}"
+                                Text="←" FontSize="20"
+                                HorizontalOptions="Start"/>
+                        <Label Text="NEW GAME"
+                               FontSize="11" FontAttributes="Bold"
+                               TextColor="#8892A4" CharacterSpacing="2"
+                               HorizontalOptions="Center" VerticalOptions="Center"
+                               Grid.Column="1"/>
+                        <Button Style="{StaticResource NeuCircleSmall}"
+                                Text="≡" FontSize="20"
+                                HorizontalOptions="End"
+                                Grid.Column="2"/>
+                    </Grid>
 
-                    <Label Text="WHO GOES FIRST?" Style="{StaticResource SectionLabel}"/>
-                    <HorizontalStackLayout Spacing="24">
-                        <RadioButton Content="Me"
-                                     IsChecked="{Binding IsHumanFirst, Mode=TwoWay}"
-                                     Style="{StaticResource RadioStyle}"/>
-                        <RadioButton Content="Computer"
-                                     IsChecked="{Binding IsComputerFirst, Mode=TwoWay}"
-                                     Style="{StaticResource RadioStyle}"/>
-                    </HorizontalStackLayout>
+                    <!-- Large neumorphic circle with tic-tac-toe grid -->
+                    <Border StrokeShape="Ellipse"
+                            HeightRequest="190" WidthRequest="190"
+                            BackgroundColor="#E4E9F2"
+                            Stroke="#FFFFFF" StrokeThickness="2"
+                            HorizontalOptions="Center"
+                            Margin="0,0,0,24">
+                        <Border.Shadow>
+                            <Shadow Brush="#9BAAC0" Offset="10,10" Radius="26" Opacity="0.6"/>
+                        </Border.Shadow>
 
-                    <Button Text="Start Game"
-                            Command="{Binding StartGameCommand}"
-                            Style="{StaticResource PrimaryButton}"
-                            Margin="0,18,0,0"/>
+                        <!-- Tic-tac-toe grid drawn with lines -->
+                        <Grid WidthRequest="96" HeightRequest="96"
+                              HorizontalOptions="Center" VerticalOptions="Center">
+                            <!-- Horizontal lines -->
+                            <BoxView HeightRequest="2" BackgroundColor="#C0C8D8"
+                                     VerticalOptions="Start" Margin="0,32,0,0"/>
+                            <BoxView HeightRequest="2" BackgroundColor="#C0C8D8"
+                                     VerticalOptions="Start" Margin="0,64,0,0"/>
+                            <!-- Vertical lines -->
+                            <BoxView WidthRequest="2" BackgroundColor="#C0C8D8"
+                                     HorizontalOptions="Start" Margin="32,0,0,0"/>
+                            <BoxView WidthRequest="2" BackgroundColor="#C0C8D8"
+                                     HorizontalOptions="Start" Margin="64,0,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Title -->
+                    <Label Text="Tic Tac Toe"
+                           FontSize="28" FontAttributes="Bold"
+                           TextColor="#3D4566"
+                           HorizontalOptions="Center"/>
+                    <!-- Subtitle -->
+                    <Label Text="vs AI"
+                           FontSize="13" TextColor="#A0AAB8"
+                           HorizontalOptions="Center"
+                           Margin="0,4,0,24"/>
+
+                    <!-- Difficulty bar (like progress bar in image) -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" Margin="4,0,4,24">
+                        <!-- Easy label + dot -->
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="4">
+                            <Label Text="Easy" FontSize="11" FontAttributes="Bold"
+                                   TextColor="{Binding IsEasySelected, Converter={StaticResource BoolToAccent}}"
+                                   HorizontalOptions="Center"/>
+                            <Border StrokeShape="Ellipse"
+                                    HeightRequest="10" WidthRequest="10"
+                                    HorizontalOptions="Center"
+                                    BackgroundColor="{Binding IsEasySelected, Converter={StaticResource BoolToAccent}}"
+                                    Stroke="Transparent">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectEasyCommand}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!-- Line -->
+                        <BoxView Grid.Column="1"
+                                 HeightRequest="2" BackgroundColor="#C8CDD8"
+                                 VerticalOptions="End" Margin="6,0,6,4"/>
+
+                        <!-- Hard label + dot -->
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="4">
+                            <Label Text="Hard" FontSize="11" FontAttributes="Bold"
+                                   TextColor="{Binding IsHardSelected, Converter={StaticResource BoolToAccent}}"
+                                   HorizontalOptions="Center"/>
+                            <Border StrokeShape="Ellipse"
+                                    HeightRequest="10" WidthRequest="10"
+                                    HorizontalOptions="Center"
+                                    BackgroundColor="{Binding IsHardSelected, Converter={StaticResource BoolToAccent}}"
+                                    Stroke="Transparent">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectHardCommand}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Controls: Me | START | AI (like ⏮ | ▶ | ⏭) -->
+                    <Grid ColumnDefinitions="*,Auto,*" Margin="0,0,0,4">
+
+                        <!-- Me first -->
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                            <Button Text="⏮"
+                                    Style="{StaticResource NeuCircleSmall}"
+                                    BackgroundColor="{Binding IsHumanFirst, Converter={StaticResource BoolToAccent}}"
+                                    TextColor="{Binding IsHumanFirst, Converter={StaticResource BoolToAccentText}}"
+                                    Command="{Binding SelectHumanFirstCommand}"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="Me first" FontSize="11" TextColor="#A0AAB8"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- START (big blue circle like play button) -->
+                        <Button Style="{StaticResource NeuCircleAccent}"
+                                Text="▶"
+                                Command="{Binding StartGameCommand}"
+                                Grid.Column="1"
+                                HorizontalOptions="Center"
+                                Margin="12,0"/>
+
+                        <!-- AI first -->
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="6">
+                            <Button Text="⏭"
+                                    Style="{StaticResource NeuCircleSmall}"
+                                    BackgroundColor="{Binding IsComputerFirst, Converter={StaticResource BoolToAccent}}"
+                                    TextColor="{Binding IsComputerFirst, Converter={StaticResource BoolToAccentText}}"
+                                    Command="{Binding SelectComputerFirstCommand}"
+                                    HorizontalOptions="Center"/>
+                            <Label Text="AI first" FontSize="11" TextColor="#A0AAB8"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
                 </VerticalStackLayout>
             </Border>
 
             <!-- ======================== GAME PANEL ======================== -->
-            <VerticalStackLayout IsVisible="{Binding IsGameActive}" Spacing="16">
+            <VerticalStackLayout IsVisible="{Binding IsGameActive}" Spacing="16"
+                                 MaximumWidthRequest="400" HorizontalOptions="Center">
 
-                <!-- Status card -->
                 <Border Style="{StaticResource NeuCard}" Padding="16,14">
                     <Label Text="{Binding StatusMessage}"
                            FontSize="16" FontAttributes="Bold"
@@ -143,7 +255,6 @@
                            HorizontalTextAlignment="Center"/>
                 </Border>
 
-                <!-- Board: extra padding so button margins don't get clipped -->
                 <Border Style="{StaticResource NeuCard}" Padding="20">
                     <Grid ColumnDefinitions="104,104,104"
                           RowDefinitions="104,104,104"
@@ -168,7 +279,6 @@
                                 TextColor="{Binding Cell2, Converter={StaticResource CellTextColor}}"
                                 Command="{Binding MakeMoveCommand}" CommandParameter="2"
                                 IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-
                         <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
                                 Text="{Binding Cell3, Converter={StaticResource CellText}}"
                                 BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
@@ -187,7 +297,6 @@
                                 TextColor="{Binding Cell5, Converter={StaticResource CellTextColor}}"
                                 Command="{Binding MakeMoveCommand}" CommandParameter="5"
                                 IsEnabled="{Binding IsComputerThinking, Converter={StaticResource InverseBool}}"/>
-
                         <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
                                 Text="{Binding Cell6, Converter={StaticResource CellText}}"
                                 BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
@@ -217,7 +326,8 @@
             </VerticalStackLayout>
 
             <!-- ======================== RESULT PANEL ======================== -->
-            <VerticalStackLayout IsVisible="{Binding IsShowingResult}" Spacing="16">
+            <VerticalStackLayout IsVisible="{Binding IsShowingResult}" Spacing="16"
+                                 MaximumWidthRequest="400" HorizontalOptions="Center">
 
                 <Border Style="{StaticResource NeuCard}" Padding="24,20">
                     <Label Text="{Binding StatusMessage}"
@@ -232,7 +342,6 @@
                           RowDefinitions="104,104,104"
                           ColumnSpacing="10" RowSpacing="10"
                           HorizontalOptions="Center">
-
                         <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource CellButton}"
                                 Text="{Binding Cell0, Converter={StaticResource CellText}}"
                                 BackgroundColor="{Binding Cell0, Converter={StaticResource CellColor}}"
@@ -248,7 +357,6 @@
                                 BackgroundColor="{Binding Cell2, Converter={StaticResource CellColor}}"
                                 TextColor="{Binding Cell2, Converter={StaticResource CellTextColor}}"
                                 IsEnabled="False"/>
-
                         <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CellButton}"
                                 Text="{Binding Cell3, Converter={StaticResource CellText}}"
                                 BackgroundColor="{Binding Cell3, Converter={StaticResource CellColor}}"
@@ -264,7 +372,6 @@
                                 BackgroundColor="{Binding Cell5, Converter={StaticResource CellColor}}"
                                 TextColor="{Binding Cell5, Converter={StaticResource CellTextColor}}"
                                 IsEnabled="False"/>
-
                         <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource CellButton}"
                                 Text="{Binding Cell6, Converter={StaticResource CellText}}"
                                 BackgroundColor="{Binding Cell6, Converter={StaticResource CellColor}}"
@@ -285,9 +392,15 @@
 
                 <Button Text="Play Again"
                         Command="{Binding RestartCommand}"
-                        Style="{StaticResource PrimaryButton}"
-                        HorizontalOptions="Center"
-                        WidthRequest="200"/>
+                        BackgroundColor="#6C63FF" TextColor="White"
+                        FontAttributes="Bold" FontSize="16"
+                        CornerRadius="16" HeightRequest="52"
+                        BorderWidth="0"
+                        HorizontalOptions="Center" WidthRequest="200">
+                    <Button.Shadow>
+                        <Shadow Brush="#6C63FF" Offset="0,8" Radius="20" Opacity="0.45"/>
+                    </Button.Shadow>
+                </Button>
             </VerticalStackLayout>
 
         </VerticalStackLayout>
